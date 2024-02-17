@@ -1,7 +1,19 @@
 const express = require('express');
+const helmet = require('helmet')
 const app = express();
 
-
+app.use(helmet({
+  frameguard: {
+    action: 'deny'
+  },
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: [" 'self '"],
+      scriptSrc: [" 'self' ", 'trusted-cdn.com']
+    }
+  },
+  dnsPrefetchControl: false
+}))
 
 
 
